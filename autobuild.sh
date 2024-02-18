@@ -9,16 +9,6 @@ format_time() {
 	printf "%02d:%02d:%02d\n" "$hours" "$minutes" "$seconds"
 }
 
-param_exists() {
-    local search_param="$1"
-    for arg in "$@"; do
-        if [[ "$arg" == "$search_param" ]]; then
-            return 0 # True, parameter found
-        fi
-    done
-    return 1 # False, parameter not found
-}
-
 script_interval=10800 # 3 hours
 
 # Your repository and branch settings
