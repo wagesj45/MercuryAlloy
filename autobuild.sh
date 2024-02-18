@@ -64,10 +64,10 @@ while true; do
 	if [ "$MILESTONE_VERSION" != "$EXE_VERSION" ]; then
 		echo "Version mismatch. Milestone version is $MILESTONE_VERSION, but built version is $EXE_VERSION. Building."
 
-		# Your build process goes here
+		# Build Mercury
 		echo "Running setup.sh" &&
 		./setup.sh --cross-avx2 &&
-		echo "Running build.sh" &&
+		#echo "Running build.sh" &&
 		./build.sh &&
 		echo "Running package.sh" &&
 		./package.sh
