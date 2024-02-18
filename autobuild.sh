@@ -11,9 +11,14 @@ format_time() {
 
 script_interval=10800 # 3 hours
 
+# Load from .env file if it exists.
+if [ -f ".env" ]; then
+    source ".env"
+fi
+
 # Your repository and branch settings
-HG_SRC_DIR="$HOME/mozilla-unified"
-MERCURY_SRC_DIR="$HOME/Mercury"
+HG_SRC_DIR="${HG_SRC_DIR:-$HOME/mozilla-unified}"
+MERCURY_SRC_DIR="${MERCURY_SRC_DIR:-$HOME/Mercury}"
 ALLOY_DIR=$(cd "$(dirname "$0")" && pwd) #Directory the current script is running from.
 BUILD_OUTPUT_DIR="$HG_SRC_DIR/obj-x86_64-pc-mingw32/dist/install/sea"
 
@@ -75,7 +80,7 @@ while true; do
 		# Move the .exe file
 		if [ -n "$EXE_FILE" ]; then
 			echo "$MILESTONE_VERSION" > $ALLOY_DIR/last_built_version.txt
-			./moves_files.sh "$MILESTONE_VERSION" "$EXE_FILE"
+			./move_files.sh "$MILESTONE_VERSION" "$EXE_FILE"
 			if [ $? -eq 0 ]; then 
 				echo "Upload successful."
 				./alert.sh "$MILESTONE_VERSION" "$EXE_FILE"
