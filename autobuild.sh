@@ -49,10 +49,15 @@ while true; do
 	echo "Last build version: $EXE_VERSION"
 
 	# Get Mercury updated and mozilla source up to date.
-	cd $MERCURY_SRC_DIR &&
-	git stash push -m "auto-stash" &&
-	git pull --rebase &&
-	git stash pop &&
+	cd $MERCURY_SRC_DIR
+
+	echo "Updating Mercury sourcecode"
+	git stash push -m "auto-stash"
+	git pull --rebase
+	git stash pop
+
+	echo "Rebasing Mozilla sourcecode"
+	echo "Running trunk.sh"
 	./trunk.sh --release
 
 	# Extract version number from milestone.txt
