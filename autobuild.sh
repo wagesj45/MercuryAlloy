@@ -28,12 +28,22 @@ echo "MercuryAlloy Directory: $ALLOY_DIR"
 
 sleep 10
 
+# Make sure we're starting with a fresh Mercury installation.
+
+cd $MERCURY_SRC_DIR
+echo "Resetting Mercury source"
+git reset --hard
+git clean -fd
+git fetch origin
+git pull
+
 # Copy custom files into Mercury repository to support automation/interactionless execution.
 
+echo "Moving MercuryAlloy override files"
 cp $ALLOY_DIR/MercuryOverrides/build.sh $MERCURY_SRC_DIR/build.sh
 cp $ALLOY_DIR/MercuryOverrides/trunk.sh $MERCURY_SRC_DIR/trunk.sh
-cp $ALLOY_DIR/MercuryOverrides/context.py $MERCURY_SRC_DIR/mozconfigs/context.py
-cp $ALLOY_DIR/MercuryOverrides/mozconfig-win-avx2-cross $MERCURY_SRC_DIR/mozconfigs/mozconfig-win-avx2-cross
+#cp $ALLOY_DIR/MercuryOverrides/context.py $MERCURY_SRC_DIR/mozconfigs/context.py
+#cp $ALLOY_DIR/MercuryOverrides/mozconfig-win-avx2-cross $MERCURY_SRC_DIR/mozconfigs/mozconfig-win-avx2-cross
 
 while true; do
 
@@ -53,7 +63,10 @@ while true; do
 
 	echo "Updating Mercury sourcecode"
 	git stash push -m "auto-stash"
-	git pull --rebase
+	git reset --hard
+	git clean -fd
+	git fetch origin
+	git pull
 	git stash pop
 
 	echo "Rebasing Mozilla sourcecode"
