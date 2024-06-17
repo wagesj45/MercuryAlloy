@@ -26,7 +26,12 @@ echo "Mozilla Source Directory: $HG_SRC_DIR"
 echo "Mercury Source Directory: $MERCURY_SRC_DIR"
 echo "MercuryAlloy Directory: $ALLOY_DIR"
 
-sleep 10
+for i in {10..1}; do
+  echo -ne "Continuing in $i\033[0K\r"
+  sleep 1
+done
+echo -ne "Done\033[0K\r"
+echo # Move to a new line at the end
 
 # Make sure we're starting with a fresh Mercury installation.
 
@@ -42,8 +47,9 @@ git pull
 echo "Moving MercuryAlloy override files"
 cp $ALLOY_DIR/MercuryOverrides/build.sh $MERCURY_SRC_DIR/build.sh
 cp $ALLOY_DIR/MercuryOverrides/trunk.sh $MERCURY_SRC_DIR/trunk.sh
-#cp $ALLOY_DIR/MercuryOverrides/context.py $MERCURY_SRC_DIR/mozconfigs/context.py
-#cp $ALLOY_DIR/MercuryOverrides/mozconfig-win-avx2-cross $MERCURY_SRC_DIR/mozconfigs/mozconfig-win-avx2-cross
+#cp $ALLOY_DIR/MercuryOverrides/moz.configure $MERCURY_SRC_DIR/toolkit/moz.configure
+#cp $ALLOY_DIR/MercuryOverrides/toolchain.configure $MERCURY_SRC_DIR/build/moz.configure/toolchain.configure
+#cp $ALLOY_DIR/MercuryOverrides/moz.build $MERCURY_SRC_DIR/moz.build
 
 while true; do
 
@@ -61,7 +67,7 @@ while true; do
 	# Get Mercury updated and mozilla source up to date.
 	cd $MERCURY_SRC_DIR
 
-	echo "Updating Mercury sourcecode"
+	#echo "Updating Mercury sourcecode"
 	git stash push -m "auto-stash"
 	git reset --hard
 	git clean -fd
@@ -71,7 +77,7 @@ while true; do
 
 	echo "Rebasing Mozilla sourcecode"
 	echo "Running trunk.sh"
-	./trunk.sh --release
+	./trunk.sh
 
 	# Extract version number from milestone.txt
 	MILESTONE_VERSION=$(cat $HG_SRC_DIR/config/milestone.txt | grep '^[^#]')
