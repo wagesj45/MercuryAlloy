@@ -47,6 +47,7 @@ git pull
 echo "Moving MercuryAlloy override files"
 cp $ALLOY_DIR/MercuryOverrides/build.sh $MERCURY_SRC_DIR/build.sh
 cp $ALLOY_DIR/MercuryOverrides/trunk.sh $MERCURY_SRC_DIR/trunk.sh
+cp $ALLOY_DIR/MercuryOverrides/mozconfig-win-avx2-cross $MERCURY_SRC_DIR/mozconfigs/mozconfig-win-avx2-cross
 #cp $ALLOY_DIR/MercuryOverrides/moz.configure $MERCURY_SRC_DIR/toolkit/moz.configure
 #cp $ALLOY_DIR/MercuryOverrides/toolchain.configure $MERCURY_SRC_DIR/build/moz.configure/toolchain.configure
 #cp $ALLOY_DIR/MercuryOverrides/moz.build $MERCURY_SRC_DIR/moz.build
