@@ -1,4 +1,10 @@
-![](https://repository-images.githubusercontent.com/759300397/300440e1-d1ea-46df-92b2-bf99d4c9db05)
+**This repository is now archived and read-only.**
+
+MercuryAlloy was an automated build script for the Mercury browser, a Firefox-based browser project. Due to frequent breaking changes in the upstream Mercury project, maintaining this script became increasingly unstable and time-consuming.
+
+Rather than chasing a moving target, this repository is being archived for reference purposes.
+
+Thanks to anyone who found it useful.
 
 # MercuryAlloy
 
